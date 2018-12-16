@@ -1,37 +1,44 @@
 <h1>Pizza Pizza!</h1>
 
-
-<ul>
-  {{#each cats}}
-    {{#unless sleepy}}
-      {{> cats/cat-block sleep=true}}
+<main>
+  <div class = "container">
+    <div class="row">
+      <div class="col s6">
+        {{#each pizza}}
+          {{#unless devoured}}
+      </div>
+      <form action="/pizza/{{this.id}}?_method=PUT" method="POST">
+      <button type="submit" class="pizzaAvailable">{{this.pizza_name}}</button>
+      </form>
+    </div>
     {{/unless}}
-  {{/each}}
-</ul>
-
-<h2>Cats that are sleepy!</h2>
-
-<ul>
-  {{#each cats}}
-    {{#if sleepy}}
-      {{> cats/cat-block sleep=false}}
-    {{/if}}
-  {{/each}}
-</ul>
-
-<h2>Add a Cat</h2>
-<form class="create-form">
-
-  <div class="form-group">
-    <label for="ca">Cat Name:</label>
-    <input type="text" id="ca" name="name">
+    {{/each}}
   </div>
 
-  <div class="form-group">
-    <label for="sleepy">Sleepy?</label><br>
-    <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
-    <input type="radio" name="sleepy" value="0"> Awake
+<div class ="col s6">
+  {{#each pizza}}
+  {{#if this.devoured}}
+  <div class="pizzaEaten">
+    <div>
+      {{this.pizza_name}}
+    </div>
   </div>
+  {{/if}}
+  {{/each}}
+  
+</div>
 
-  <button type="submit">Add Cat</button>
-</form>
+</main>
+
+
+<h2>Add a Pizza of your liking!</h2>
+
+<div class="row">
+  <div class="col s12">
+    <form action="/pizza" method="POST">
+    <input type="text" id="name" name="pizza_name" placeholder="Yummy Pizza">
+    <button type="submit" class="addPizzaButton">Add a Pizza</button>
+    </form>
+  </div>
+</div>
+
